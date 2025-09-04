@@ -1,0 +1,12 @@
+{
+    "owner": "data_team",
+    "description": "Обработка сырых данных",
+    "schedule_interval": "@daily",
+    "retries": 3,
+    "retry_delay_minutes": 5,
+    "tags": ["data-processing", "etl"],
+    "depends_on_past": false,
+    "email_on_failure": true,
+    "catchup": false,
+    "max_active_runs": 1
+}

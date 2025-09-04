@@ -1,0 +1,52 @@
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
+import sys
+import inspect
+
+# Default arguments from JSON parameters
+default_args = {
+    'owner': '{{ owner | default("airflow") }}',
+    'depends_on_past': {{ depends_on_past | default(False) }},
+    'email_on_failure': {{ email_on_failure | default(False) }},
+    'email_on_retry': {{ email_on_retry | default(False) }},
+    'retries': {{ retries | default(1) }},
+    'retry_delay': timedelta(minutes={{ retry_delay_minutes | default(5) }})
+}
+
+# Dynamic function extraction from script content
+{{ script_content }}
+
+with DAG(
+    dag_id='{{ dag_id }}',
+    default_args=default_args,
+    description='{{ description | default("Автогенерируемый Python DAG") }}',
+    schedule_interval='{{ schedule_interval | default("@daily") }}',
+    start_date=datetime({{ year }}, {{ month }}, {{ day }}),
+    tags={{ tags | default(["python", "generated"]) }},
+    catchup={{ catchup | default(False) }},
+    max_active_runs={{ max_active_runs | default(1) }}
+) as dag:
+
+    # Get all functions from current module (excluding built-ins)
+    current_module = sys.modules[__name__]
+    functions = inspect.getmembers(current_module, inspect.isfunction)
+
+    # Filter out built-in functions and get only user-defined functions
+    user_functions = [(name, obj) for name, obj in functions
+                     if not name.startswith('_') and obj.__module__ == __name__]
+
+    # Create tasks dynamically
+    previous_task = None
+
+    for func_name, func_obj in user_functions:
+        task = PythonOperator(
+            task_id=func_name,
+            python_callable=func_obj,
+            dag=dag,
+        )
+
+        # Set dependencies
+        if previous_task:
+            previous_task >> task
+        previous_task = task

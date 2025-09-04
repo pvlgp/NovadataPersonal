@@ -1,0 +1,27 @@
+[2025-08-13T20:38:02.451+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-13T20:38:02.458+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: main.run_pyspark_task scheduled__2025-08-12T00:00:00+00:00 [queued]>
+[2025-08-13T20:38:02.461+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: main.run_pyspark_task scheduled__2025-08-12T00:00:00+00:00 [queued]>
+[2025-08-13T20:38:02.461+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-08-13T20:38:02.465+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_pyspark_task> on 2025-08-12 00:00:00+00:00
+[2025-08-13T20:38:02.467+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=58) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-08-13T20:38:02.467+0000] {standard_task_runner.py:63} INFO - Started process 59 to run task
+[2025-08-13T20:38:02.468+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'main', 'run_pyspark_task', 'scheduled__2025-08-12T00:00:00+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpql1ebv01']
+[2025-08-13T20:38:02.468+0000] {standard_task_runner.py:91} INFO - Job 6: Subtask run_pyspark_task
+[2025-08-13T20:38:02.484+0000] {task_command.py:426} INFO - Running <TaskInstance: main.run_pyspark_task scheduled__2025-08-12T00:00:00+00:00 [running]> on host 1ed929767bb5
+[2025-08-13T20:38:02.516+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='main' AIRFLOW_CTX_TASK_ID='run_pyspark_task' AIRFLOW_CTX_EXECUTION_DATE='2025-08-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-12T00:00:00+00:00'
+[2025-08-13T20:38:02.517+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-13T20:38:08.167+0000] {logging_mixin.py:188} INFO - +-------+---+
+|   name| id|
++-------+---+
+|  Alice|  1|
+|    Bob|  2|
+|Charlie|  3|
++-------+---+
+[2025-08-13T20:38:09.148+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-08-13T20:38:09.149+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-13T20:38:09.153+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=main, task_id=run_pyspark_task, run_id=scheduled__2025-08-12T00:00:00+00:00, execution_date=20250812T000000, start_date=20250813T203802, end_date=20250813T203809
+[2025-08-13T20:38:09.197+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-13T20:38:09.205+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-13T20:38:09.205+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

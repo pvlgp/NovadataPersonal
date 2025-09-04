@@ -1,0 +1,43 @@
+from airflow import DAG
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
+from datetime import datetime, timedelta
+import re
+
+# Default arguments from JSON parameters
+default_args = {
+    'owner': '{{ owner | default("airflow") }}',
+    'depends_on_past': {{ depends_on_past | default(False) }},
+    'email_on_failure': {{ email_on_failure | default(False) }},
+    'email_on_retry': {{ email_on_retry | default(False) }},
+    'retries': {{ retries | default(1) }},
+    'retry_delay': timedelta(minutes={{ retry_delay_minutes | default(5) }})
+}
+
+# Database connections from Airflow
+{% if postgres_conn %}
+POSTGRES_CONN_ID = '{{ postgres_conn_id | default("postgres_default") }}'
+{% endif %}
+
+{% if extra_db_conn %}
+EXTRA_DB_CONN_ID = '{{ extra_db_conn_id | default("postgres_extra") }}'
+{% endif %}
+
+with DAG(
+    dag_id='{{ dag_id }}',
+    default_args=default_args,
+    description='{{ description | default("Автогенерируемый SQL DAG") }}',
+    schedule_interval='{{ schedule_interval | default("@daily") }}',
+    start_date=datetime({{ year }}, {{ month }}, {{ day }}),
+    tags={{ tags | default(["sql", "generated"]) }},
+    catchup={{ catchup | default(False) }},
+    max_active_runs={{ max_active_runs | default(1) }}
+) as dag:
+
+    task = SQLExecuteQueryOperator(
+        task_id="execute_sql_script",
+        conn_id=POSTGRES_CONN_ID,
+        sql="""{{ script_content }}""",
+        dag=dag,
+        autocommit={{ autocommit | default(True) }},
+        database='{{ database | default(None) }}'
+    )

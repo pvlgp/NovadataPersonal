@@ -1,0 +1,54 @@
+[2025-09-04T12:49:40.806+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-04T12:49:40.815+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_scanner.scan_and_generate_dags scheduled__2025-09-04T12:30:00+00:00 [queued]>
+[2025-09-04T12:49:40.817+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_scanner.scan_and_generate_dags scheduled__2025-09-04T12:30:00+00:00 [queued]>
+[2025-09-04T12:49:40.817+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-09-04T12:49:40.821+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): scan_and_generate_dags> on 2025-09-04 12:30:00+00:00
+[2025-09-04T12:49:40.823+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=487) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-09-04T12:49:40.824+0000] {standard_task_runner.py:63} INFO - Started process 488 to run task
+[2025-09-04T12:49:40.824+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'dag_scanner', 'scan_and_generate_dags', 'scheduled__2025-09-04T12:30:00+00:00', '--job-id', '78', '--raw', '--subdir', 'DAGS_FOLDER/created_dags.py', '--cfg-path', '/tmp/tmpfgiobaw4']
+[2025-09-04T12:49:40.827+0000] {standard_task_runner.py:91} INFO - Job 78: Subtask scan_and_generate_dags
+[2025-09-04T12:49:40.844+0000] {task_command.py:426} INFO - Running <TaskInstance: dag_scanner.scan_and_generate_dags scheduled__2025-09-04T12:30:00+00:00 [running]> on host ade5f5069171
+[2025-09-04T12:49:40.868+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='admin@example.com' AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dag_scanner' AIRFLOW_CTX_TASK_ID='scan_and_generate_dags' AIRFLOW_CTX_EXECUTION_DATE='2025-09-04T12:30:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-04T12:30:00+00:00'
+[2025-09-04T12:49:40.868+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-04T12:49:40.873+0000] {created_dags.py:317} INFO - Starting DAG scanner execution
+[2025-09-04T12:49:40.873+0000] {created_dags.py:86} INFO - Jinja2 environment initialized successfully
+[2025-09-04T12:49:40.873+0000] {created_dags.py:118} INFO - Scanning for scripts in: /opt/***/scripts
+[2025-09-04T12:49:40.874+0000] {created_dags.py:123} INFO - Found 2 script files
+[2025-09-04T12:49:40.874+0000] {created_dags.py:333} INFO - Found 2 script(s) to process
+[2025-09-04T12:49:40.875+0000] {created_dags.py:145} INFO - Found JSON parameters: do_something.json
+[2025-09-04T12:49:40.875+0000] {created_dags.py:252} INFO - Processing script: do_something.py
+[2025-09-04T12:49:40.875+0000] {created_dags.py:145} INFO - Found JSON parameters: do_something.json
+[2025-09-04T12:49:40.875+0000] {created_dags.py:173} INFO - Reading script: do_something.py
+[2025-09-04T12:49:40.875+0000] {created_dags.py:187} INFO - Loading JSON parameters: do_something.json
+[2025-09-04T12:49:40.876+0000] {created_dags.py:196} INFO - JSON parameters loaded successfully
+[2025-09-04T12:49:40.876+0000] {created_dags.py:160} INFO - Loading template: python_template.j2
+[2025-09-04T12:49:40.880+0000] {created_dags.py:162} INFO - Template loaded successfully
+[2025-09-04T12:49:40.880+0000] {created_dags.py:213} INFO - Generated DAG ID: generated_py_do_something
+[2025-09-04T12:49:40.881+0000] {created_dags.py:239} INFO - DAG successfully written to: dag_do_something.py
+[2025-09-04T12:49:40.881+0000] {created_dags.py:305} INFO - Successfully created DAG for: do_something.py
+[2025-09-04T12:49:40.882+0000] {created_dags.py:145} INFO - Found JSON parameters: select_data.json
+[2025-09-04T12:49:40.882+0000] {created_dags.py:252} INFO - Processing script: select_data.sql
+[2025-09-04T12:49:40.882+0000] {created_dags.py:145} INFO - Found JSON parameters: select_data.json
+[2025-09-04T12:49:40.882+0000] {created_dags.py:173} INFO - Reading script: select_data.sql
+[2025-09-04T12:49:40.882+0000] {created_dags.py:187} INFO - Loading JSON parameters: select_data.json
+[2025-09-04T12:49:40.883+0000] {created_dags.py:196} INFO - JSON parameters loaded successfully
+[2025-09-04T12:49:40.883+0000] {created_dags.py:160} INFO - Loading template: sql_template.j2
+[2025-09-04T12:49:40.887+0000] {created_dags.py:162} INFO - Template loaded successfully
+[2025-09-04T12:49:40.889+0000] {created_dags.py:112} ERROR - Failed to get connection postgres_default: The conn_id `postgres_default` isn't defined
+[2025-09-04T12:49:40.891+0000] {created_dags.py:112} ERROR - Failed to get connection postgres_extra: The conn_id `postgres_extra` isn't defined
+[2025-09-04T12:49:40.891+0000] {created_dags.py:213} INFO - Generated DAG ID: generated_sql_select_data
+[2025-09-04T12:49:40.893+0000] {created_dags.py:239} INFO - DAG successfully written to: dag_select_data.py
+[2025-09-04T12:49:40.893+0000] {created_dags.py:305} INFO - Successfully created DAG for: select_data.sql
+[2025-09-04T12:49:40.893+0000] {created_dags.py:372} INFO - Removed processed script: do_something.py
+[2025-09-04T12:49:40.893+0000] {created_dags.py:379} INFO - Removed JSON parameters: do_something.json
+[2025-09-04T12:49:40.893+0000] {created_dags.py:372} INFO - Removed processed script: select_data.sql
+[2025-09-04T12:49:40.894+0000] {created_dags.py:379} INFO - Removed JSON parameters: select_data.json
+[2025-09-04T12:49:40.894+0000] {created_dags.py:358} INFO - Processing completed. Success: 2/2
+[2025-09-04T12:49:40.894+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-04T12:49:40.895+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-04T12:49:40.898+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=dag_scanner, task_id=scan_and_generate_dags, run_id=scheduled__2025-09-04T12:30:00+00:00, execution_date=20250904T123000, start_date=20250904T124940, end_date=20250904T124940
+[2025-09-04T12:49:40.929+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-04T12:49:40.937+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-04T12:49:40.937+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
